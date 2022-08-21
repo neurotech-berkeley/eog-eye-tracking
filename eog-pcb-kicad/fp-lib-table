@@ -1,0 +1,5 @@
+(fp_lib_table
+  (lib (name "20TQC100MYF")(type "KiCad")(uri "/Users/inga/Desktop/NT@B/eog-collection-pcb/Libraries/20TQC100MYF")(options "")(descr ""))
+  (lib (name "MAX764ESA_")(type "KiCad")(uri "/Users/inga/Desktop/NT@B/eog-collection-pcb/Libraries/MAX764ESA_")(options "")(descr ""))
+  (lib (name "MBRS330T3G")(type "KiCad")(uri "/Users/inga/Desktop/NT@B/eog-collection-pcb/Libraries/MBRS330T3G")(options "")(descr ""))
+)
