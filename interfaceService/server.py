@@ -1,17 +1,20 @@
 # import statements
 import grpc
-import example_pb2 as pb
-import example_pb2_grpc as pb_grpc
+import device_pb2 as pb
+import device_pb2_grpc as pb_grpc
 
 from concurrent import futures
 
 # define servicer (not implemented in grpc generate protocol buffer)
-class HelloServiceServicer(pb_grpc.HelloServiceServicer):
-    def HelloWorld(self, request, context):
+class EogSignalServiceServicer(pb_grpc.EogSignalServiceServicer):
+    def Classify(self, request, context):
         print("Request received")
-        print(request.text + " " + request.name)
-        reply = str(int(request.text) * int(request.name))
-        res = pb.HelloWorldResponse(text = reply)
+        print (request.deviceId)
+        print (request.data)
+        classification = request.data[0]
+        # TODO: write the classification algorithm here. 
+        # request.data will come in 
+        res = pb.EogServerResponse(deviceId = request.deviceId, direction = classification)
         return res
 
 
@@ -24,11 +27,11 @@ def serve():
             ("grpc.max_receive_message_length", 100000000),
         ],
     )
-    pb_grpc.add_HelloServiceServicer_to_server(
-		HelloServiceServicer(), server
+    pb_grpc.add_EogSignalServiceServicer_to_server(
+		EogSignalServiceServicer(), server
 	)
     server.add_insecure_port('[::]:50051')
-    print("server is running!");
+    print("server is running!")
     server.start()
     server.wait_for_termination()
 

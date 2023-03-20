@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package example;
+
+message HelloWorldRequest {
+  string text = 1;
+  string name = 2;
+}
+
+message HelloWorldResponse {
+  string text = 1;
+}
+
+service HelloService {
+  rpc HelloWorld(HelloWorldRequest) returns (HelloWorldResponse);
+}
+
+message EogClientRequest {
+  // data is an array that can be passed in at runtime. protobuf files do not have a 
+  // array length specification, so the client must be careful not to make the data array too long.
+  string deviceId = 1;
+  repeated int32 data = 2;
+}
+
+message EogServerResponse {
+  // the server returns the direction of the eye gaze, via an enum object Direction
+  // choosing here to use an enum instead of a string because it makes it easier to extract information/query
+  enum Direction {
+    CENTER = 0;
+    UP = 1;
+    DOWN = 2;
+    LEFT = 3;
+    RIGHT = 4;
+  }
+
+  string deviceId = 1;
+  Direction direction = 2;
+}
+
+service EogSignalService {
+  // a request to the Classify ML object, which runs in the server.
+  rpc Classify(EogClientRequest) returns (EogServerResponse);
+}
