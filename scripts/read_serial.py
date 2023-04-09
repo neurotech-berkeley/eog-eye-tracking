@@ -47,7 +47,9 @@ writer.writeheader()
 
 while serialPort:
     x = serialPort.readline()
-    millis, adc = str(x)[2:][:-5].split(" ") # adc is 0 to 1023
+    print("OUTPUT")
+    print(x)
+    millis, adc = str(x).split(" ") #[2:][:-5].split(" ") # adc is 0 to 1023
 
     print(millis, adc)
     writer.writerow({'millis': millis, 'adc': adc})

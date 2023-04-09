@@ -6,6 +6,7 @@ int horizontal_reading = 0;
 void setup() {
   Serial.begin(9600);
 }
+
 void loop() {
   vertical_reading = analogRead(VERTICAL_CH_PIN);
   horizontal_reading = analogRead(HORIZONTAL_CH_PIN);
@@ -16,5 +17,4 @@ void loop() {
   Serial.print(" ");
   Serial.print("1200");
   Serial.print(" ");
-  delay(3);
 }
